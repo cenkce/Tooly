@@ -1,0 +1,26 @@
+{
+  "name": "toolyjs",
+  "description": "Useful toolsets for popular libraries and frameworks",
+  "main": "src/tooly/tooly",
+  "authors": [
+    "Cenk Cetinkaya"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "javascript",
+    "bootstrap",
+    "wordpress",
+    "bbpress",
+    "tools"
+  ],
+  "homepage": "https://github.com/cenkce/Tooly",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    ".gitignore",
+    "test",
+    "tests"
+  ]
+}
