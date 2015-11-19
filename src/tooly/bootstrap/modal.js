@@ -5,7 +5,7 @@ define("tooly/bootstrap/modal",["jquery"], function($){
 
     var $b = {};
     $b.Version="0.1";
-    var modal = [];
+    var modal = [], elements = [];
 
     $b.Options = function () {
             var backdrop=true,
@@ -120,12 +120,10 @@ define("tooly/bootstrap/modal",["jquery"], function($){
                 _modal.bind($b.Event.shown, privateMethods.onShown);
 
                 var publicMethods = {
-                    inject: function (element) {
+                    register: function (name, element) {
+                        elements[name] = element;
+                        $(element).remove();
                         //console.log("inject", element);
-                        $(element).show();
-                        var modalContent = _modal.find(".modal-content");
-                        privateMethods.clear();
-                        privateMethods.add(element);
                         return this;
                     },
                     setOptions:function(ops){
@@ -136,8 +134,16 @@ define("tooly/bootstrap/modal",["jquery"], function($){
                     getOptions:function(){
                         return $(options).clone();
                     },
-                    show:function () {
+                    show:function (name) {
+                        var element = elements[name];
+                        $(element).show();
+
+                        var modalContent = _modal.find(".modal-content");
+                        privateMethods.clear();
+                        privateMethods.add(element);
+
                         //console.log("show");
+
                         options.show = true;
                         this.setOptions(options);
                         return this;
