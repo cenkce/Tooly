@@ -21,9 +21,10 @@ define("tooly/wordpress/bbpress",
         "jquery",
         "tooly/wordpress/wordpress",
         "tooly/bootstrap/modal",
-        "tooly/wordpress/bbpress/config"
+        "tooly/wordpress/bbpress/config",
+        "tooly/wordpress/bbpress/editor",
     ],
-    function($, wordpress, modal, config) {
+    function($, wordpress, modal, config, editor) {
         var modalController = modal.Helper.createController(config.modalClass);
 
         function parseReplyID(link){
@@ -39,6 +40,7 @@ define("tooly/wordpress/bbpress",
                 return;
 
             var form = $(config.newTopicFormClass).clone();
+            editor.Helper.initForm(form);
             modalController.register('bbpress_newTopicForm', form).show();
             e.preventDefault();
             cancelableEventDispatch(Event.newTopicFormOpened, e.target);
@@ -57,7 +59,7 @@ define("tooly/wordpress/bbpress",
             var reply_id = 0,
                 type = "",
                 form = $(config.replyFormClass).clone();
-
+                editor.Helper.initForm(form);
             if(e.target.className.indexOf(config.topicReplyLinkClass.replace(".", "")) >= 0) {
                 type = "topic";
             } else if(e.target.className.indexOf(config.replyReplyLinkClass.replace(".", "")) >= 0) {
