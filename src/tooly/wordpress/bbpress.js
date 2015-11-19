@@ -39,7 +39,7 @@ define("tooly/wordpress/bbpress",
                 return;
 
             var form = $(config.newTopicFormClass).clone();
-            modalController.inject(form).show();
+            modalController.register('bbpress_newTopicForm', form).show();
             e.preventDefault();
             cancelableEventDispatch(Event.newTopicFormOpened, e.target);
         }
@@ -71,7 +71,7 @@ define("tooly/wordpress/bbpress",
 
             parent.val(reply_id);
             post.val(wordpress.Helper.getPostId());
-            modalController.inject(form).show();
+            modalController.register('bbpress_replyForm', form).show();
             e.preventDefault();
 
             cancelableEventDispatch(Event.topicReplyFormOpened, e.target);

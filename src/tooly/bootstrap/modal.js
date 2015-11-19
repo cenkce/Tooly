@@ -119,10 +119,13 @@ define("tooly/bootstrap/modal",["jquery"], function($){
                 _modal.bind($b.Event.show, privateMethods.onShow);
                 _modal.bind($b.Event.shown, privateMethods.onShown);
 
+                var currentElementName = '';
+
                 var publicMethods = {
                     register: function (name, element) {
                         elements[name] = element;
                         $(element).remove();
+                        currentElementName = name;
                         //console.log("inject", element);
                         return this;
                     },
@@ -135,6 +138,8 @@ define("tooly/bootstrap/modal",["jquery"], function($){
                         return $(options).clone();
                     },
                     show:function (name) {
+                        if(name === undefined)
+                            name = currentElementName;
                         var element = elements[name];
                         $(element).show();
 
