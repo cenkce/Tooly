@@ -123,6 +123,10 @@ define("tooly/bootstrap/modal",["jquery"], function($){
 
                 var publicMethods = {
                     register: function (name, element) {
+                        if(elements[name] == null){
+                            currentElementName = name;
+                            return this;
+                        }
                         elements[name] = element;
                         $(element).remove();
                         currentElementName = name;
