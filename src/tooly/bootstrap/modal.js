@@ -128,7 +128,7 @@ define("tooly/bootstrap/modal",["jquery"], function($){
                             return this;
                         }
                         elements[name] = element;
-                        $(element).remove();
+                        //$(element).remove();
                         currentElementName = name;
                         //console.log("inject", element);
                         return this;
