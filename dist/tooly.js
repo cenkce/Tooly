@@ -870,59 +870,18 @@ define("tooly/wordpress/bbpress/editor",
     function($, wordpress, modal, bbpress) {
         return {
                 Helper:{
-                    initForm:function(form){
-                        if ( typeof( edButtons ) !== 'undefined' ) {
-                            edButtons[110] = new QTags.TagButton( 'code', 'code', '`', '`', 'c' );
-                            QTags._buttonsInit();
+                    initForm:function(id, buttons){
+                        if(QTags.getInstance('bbp_topic_content').canvas.value){
+                            var qt = quicktags({id:id,buttons: buttons});
                         }
+                        QTags.getInstance('bbp_topic_content')
+                        QTags.getInstance('bbp_topic_content').canvas.value = '';
+                    },
+                    addQutoedReply: function (id, quote) {
+                        QTags.getInstance(id).canvas.value = '<blockquote>'+quote+'</blockquote>';
+                    }
 
-                        /* Tab from topic title */
-                        form.bind( 'keydown.editor-focus', function(e) {
-                            if ( e.which !== 9 )
-                                return;
-
-                            if ( !e.ctrlKey && !e.altKey && !e.shiftKey ) {
-                                if ( typeof( tinymce ) !== 'undefined' ) {
-                                    if ( ! tinymce.activeEditor.isHidden() ) {
-                                        var editor = tinymce.activeEditor.editorContainer;
-                                        form.find( '#' + editor + ' td.mceToolbar > a' ).focus();
-                                    } else {
-                                        form.find( 'textarea.bbp-the-content' ).focus();
-                                    }
-                                } else {
-                                    form.find( 'textarea.bbp-the-content' ).focus();
-                                }
-
-                                e.preventDefault();
-                            }
-                        });
-
-                        /* Shift + tab from topic tags */
-                        form.bind( 'keydown.editor-focus', function(e) {
-                            if ( e.which !== 9 )
-                                return;
-
-                            if ( e.shiftKey && !e.ctrlKey && !e.altKey ) {
-                                if ( typeof( tinymce ) !== 'undefined' ) {
-                                    if ( ! tinymce.activeEditor.isHidden() ) {
-                                        var editor = tinymce.activeEditor.editorContainer;
-                                        form.find( '#' + editor + ' td.mceToolbar > a' ).focus();
-                                    } else {
-                                        form.find( 'textarea.bbp-the-content' ).focus();
-                                    }
-                                } else {
-                                    form.find( 'textarea.bbp-the-content' ).focus();
-                                }
-
-                                e.preventDefault();
-                            }
-                        });
-
-            },
-            addQutoedReply: function (form, quote) {
-                
-            }
-        }
+                }
         };
 });
 define("wordpress/bbpress-editor.js", function(){});
@@ -969,9 +928,10 @@ define("tooly/wordpress/bbpress",
             if(cancelableEventDispatch(Event.newTopicFormOpen, e.target))
                 return;
 
-            var form = $(config.newTopicFormClass).clone();
-            editor.Helper.initForm(form.find('form'));
+            //var form = $(config.newTopicFormClass).clone();
+            var form = $(config.newTopicFormClass);
             modalController.register('bbpress_newTopicForm', form).show();
+            editor.Helper.initForm(form.find('form'));
             e.preventDefault();
             cancelableEventDispatch(Event.newTopicFormOpened, e.target);
         }
@@ -988,8 +948,8 @@ define("tooly/wordpress/bbpress",
 
             var reply_id = 0,
                 type = "",
-                form = $(config.replyFormClass).clone();
-                editor.Helper.initForm(form.find('form'));
+                form = $(config.replyFormClass);
+                //form = $(config.replyFormClass).clone();
             if(e.target.className.indexOf(config.topicReplyLinkClass.replace(".", "")) >= 0) {
                 type = "topic";
             } else if(e.target.className.indexOf(config.replyReplyLinkClass.replace(".", "")) >= 0) {
@@ -1004,6 +964,7 @@ define("tooly/wordpress/bbpress",
             parent.val(reply_id);
             post.val(wordpress.Helper.getPostId());
             modalController.register('bbpress_replyForm', form).show();
+            editor.Helper.initForm(form.find('form'));
             e.preventDefault();
 
             cancelableEventDispatch(Event.topicReplyFormOpened, e.target);
