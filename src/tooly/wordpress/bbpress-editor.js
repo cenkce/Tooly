@@ -17,10 +17,11 @@ define("tooly/wordpress/bbpress/editor",
         return {
                 Helper:{
                     initForm:function(form){
-                        if ( typeof( edButtons ) !== 'undefined' ) {
+                        //quicktags();
+                        //if ( typeof( edButtons ) !== 'undefined' ) {
                             edButtons[110] = new QTags.TagButton( 'code', 'code', '`', '`', 'c' );
                             QTags._buttonsInit();
-                        }
+                        //}
 
                         /* Tab from topic title */
                         form.bind( 'keydown.editor-focus', function(e) {
