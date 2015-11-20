@@ -110,7 +110,7 @@ define("tooly/bootstrap/modal",["jquery"], function($){
                         _modal.unbind($b.Event.shown);
                         _modal.remove();
                         handlers = null;
-                        _modal    = null;
+                        _modal   = null;
                     }
                 };
 
