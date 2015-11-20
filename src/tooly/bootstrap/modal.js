@@ -123,6 +123,7 @@ define("tooly/bootstrap/modal",["jquery"], function($){
 
                 var publicMethods = {
                     register: function (name, element) {
+/*
                         if(elements[name] != undefined){
                             currentElementName = name;
                             return this;
@@ -131,6 +132,11 @@ define("tooly/bootstrap/modal",["jquery"], function($){
                         //$(element).remove();
                         currentElementName = name;
                         //console.log("inject", element);
+*/
+                        $(element).show();
+                        var modalContent = _modal.find(".modal-content");
+                        privateMethods.clear();
+                        privateMethods.add(element);
                         return this;
                     },
                     setOptions:function(ops){
@@ -142,6 +148,7 @@ define("tooly/bootstrap/modal",["jquery"], function($){
                         return $(options).clone();
                     },
                     show:function (name) {
+/*
                         if(name === undefined)
                             name = currentElementName;
                         var element = elements[name];
@@ -153,6 +160,7 @@ define("tooly/bootstrap/modal",["jquery"], function($){
 
                         //console.log("show");
 
+*/
                         options.show = true;
                         this.setOptions(options);
                         return this;
