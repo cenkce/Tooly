@@ -39,7 +39,8 @@ define("tooly/wordpress/bbpress",
             if(cancelableEventDispatch(Event.newTopicFormOpen, e.target))
                 return;
 
-            var form = $(config.newTopicFormClass).clone();
+            //var form = $(config.newTopicFormClass).clone();
+            var form = $(config.newTopicFormClass);
             editor.Helper.initForm(form.find('form'));
             modalController.register('bbpress_newTopicForm', form).show();
             e.preventDefault();
@@ -58,7 +59,8 @@ define("tooly/wordpress/bbpress",
 
             var reply_id = 0,
                 type = "",
-                form = $(config.replyFormClass).clone();
+                form = $(config.replyFormClass);
+                //form = $(config.replyFormClass).clone();
                 editor.Helper.initForm(form.find('form'));
             if(e.target.className.indexOf(config.topicReplyLinkClass.replace(".", "")) >= 0) {
                 type = "topic";
