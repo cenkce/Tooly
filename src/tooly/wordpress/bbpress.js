@@ -40,7 +40,8 @@ define("tooly/wordpress/bbpress",
                 return;
 
             var form = $(config.newTopicFormClass).clone();
-            editor.Helper.initForm(form);
+            console.watch(form);
+            editor.Helper.initForm(form.find('form'));
             modalController.register('bbpress_newTopicForm', form).show();
             e.preventDefault();
             cancelableEventDispatch(Event.newTopicFormOpened, e.target);
@@ -59,7 +60,7 @@ define("tooly/wordpress/bbpress",
             var reply_id = 0,
                 type = "",
                 form = $(config.replyFormClass).clone();
-                editor.Helper.initForm(form);
+                editor.Helper.initForm(form.find('form'));
             if(e.target.className.indexOf(config.topicReplyLinkClass.replace(".", "")) >= 0) {
                 type = "topic";
             } else if(e.target.className.indexOf(config.replyReplyLinkClass.replace(".", "")) >= 0) {
