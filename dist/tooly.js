@@ -970,7 +970,6 @@ define("tooly/wordpress/bbpress",
                 return;
 
             var form = $(config.newTopicFormClass).clone();
-            console.watch(form);
             editor.Helper.initForm(form.find('form'));
             modalController.register('bbpress_newTopicForm', form).show();
             e.preventDefault();
