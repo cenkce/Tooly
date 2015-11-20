@@ -61,7 +61,8 @@ define("tooly/wordpress/bbpress",
                 type = "",
                 form = $(config.replyFormClass);
 
-            var quote = $(e.target).parent().parent().parent().find('bbp-reply-content').html();
+
+            //var quote = $(e.target).parent().parent().parent().find('bbp-reply-content').html();
 
                 //form = $(config.replyFormClass).clone();
             if(e.target.className.indexOf(config.topicReplyLinkClass.replace(".", "")) >= 0) {
@@ -78,7 +79,7 @@ define("tooly/wordpress/bbpress",
             parent.val(reply_id);
             post.val(wordpress.Helper.getPostId());
             modalController.register('bbpress_replyForm', form).show();
-            editor.Helper.initForm('bbp_reply_content').reset('bbp_reply_content').addQutoedReply('bbp_reply_content',quote);
+            //editor.Helper.initForm('bbp_reply_content');.reset('bbp_reply_content').addQutoedReply('bbp_reply_content',quote);
             e.preventDefault();
 
             cancelableEventDispatch(Event.topicReplyFormOpened, e.target);
